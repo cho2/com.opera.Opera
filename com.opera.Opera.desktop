@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Utility;
+Comment=Opera web browser
+Exec=/app/bin/opera-app
+Icon=com.opera.Opera
+Name=Opera
+NoDisplay=true
+Type=Application
+Version=1.0
+X-Endless-LaunchMaximized=true

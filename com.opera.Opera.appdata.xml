@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+    <id>com.opera.Opera.desktop</id>
+    <update_contact>social-networks@opera.com</update_contact>
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>Freeware</project_license>
+    <categories>
+        <category>Utility</category>
+    </categories>
+
+    <name>Opera</name>
+    <summary>Opera web browser</summary>
+    <description><p>Fast, secure, easy-to-use browser</p></description>
+
+    <screenshots>
+        <screenshot>
+            <image type="source">https://www-static.operacdn.com/static-heap/09/0912bc8ca2c6a623560e1fd8c58f9387da78ed27/flow-linux.png</image>
+        </screenshot>
+    </screenshots>
+
+    <metadata>
+        <value key="EndlessOS::system-desktop-file">opera.desktop</value>
+        <value key="GnomeSoftware::popular-background">https://www-static.operacdn.com/static-heap/09/0912bc8ca2c6a623560e1fd8c58f9387da78ed27/flow-linux.png</value>
+    </metadata>
+
+    <developer_name>Opera Software</developer_name>
+    <url type="homepage">https://www.opera.com</url>
+</component>

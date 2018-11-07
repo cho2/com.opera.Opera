@@ -1,0 +1,100 @@
+{
+    "app-id": "com.opera.Opera",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "1.6",
+    "sdk": "org.freedesktop.Sdk",
+    "command": "/app/bin/opera-app",
+    "cleanup": [
+        "/etc",
+        "/include",
+        "/lib/pkgconfig",
+        "/share/aclocal",
+        "/share/gtk-doc",
+        "/share/locale",
+        "/share/man",
+        "/share/runtime",
+        "*.la"
+    ],
+    "modules": [
+        {
+            "name": "opera-app",
+            "buildsystem": "simple",
+            "sources": [
+                {
+                    "type": "file",
+                    "path": "opera-app"
+                },
+                {
+                    "type": "file",
+                    "path": "com.opera.Opera.appdata.xml"
+                },
+                {
+                    "type": "file",
+                    "path": "com.opera.Opera.desktop"
+                },
+                {
+                    "type": "file",
+                    "path": "product_logo_64.png"
+                },
+                {
+                    "type": "file",
+                    "path": "product_logo_128.png"
+                },
+                {
+                    "type": "file",
+                    "path": "product_logo_256.png"
+                }
+            ],
+            "build-commands": [
+                "install -d /app/bin",
+                "install opera-app /app/bin/opera-app",
+
+                "install -d /app/share/appdata",
+                "install -m644 com.opera.Opera.appdata.xml /app/share/appdata/com.opera.Opera.appdata.xml",
+
+                "install -d /app/share/applications",
+                "install -m644 com.opera.Opera.desktop /app/share/applications/com.opera.Opera.desktop",
+
+                "for icon_size in 64 128 256; do install -d /app/share/icons/hicolor/${icon_size}x${icon_size}/apps; install -m644 product_logo_${icon_size}.png /app/share/icons/hicolor/${icon_size}x${icon_size}/apps/com.opera.Opera.png; done"
+            ]
+        },
+        {
+            "name": "opera",
+            "buildsystem": "simple",
+            "sources": [
+                {
+                    "type": "extra-data",
+                    "filename": "opera.deb",
+                    "only-arches": [ "x86_64" ],
+                    "url": "https://deb.opera.com/opera-stable/pool/non-free/o/opera-stable/opera-stable_56.0.3051.99_amd64.deb",
+                    "sha256": "a8629c3a133a645a7e1238985050c3bad2311356ac442b9d9ac37063d6a5c4d5",
+                    "size": 56052962,
+                    "x-checker-data": {
+                        "type": "debian-repo",
+                        "package-name": "opera-stable",
+                        "root": "https://deb.opera.com/opera-stable/pool/non-free/o/opera-stable/",
+                        "dist": "stable",
+                        "component": "non-free"
+                    }
+                },
+                {
+                    "type": "script",
+                    "dest-filename": "apply_extra",
+                    "commands": [
+                        "ar x opera.deb",
+                        "rm -f opera.deb",
+                        "tar xf data.tar.xz",
+                        "rm -f control.tar.gz data.tar.xz debian-binary",
+                        "chmod a+xr ."
+                    ]
+                }
+            ],
+            "build-commands": [
+                "install apply_extra /app/bin/apply_extra",
+                "install /usr/bin/ar /app/bin/ar",
+                "install -d /app/lib",
+                "install -t /app/lib /usr/lib/libbfd-*.so"
+            ]
+        }
+    ]
+}
